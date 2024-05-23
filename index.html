@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Development Quiz</title>
-    <style>
-        .question { display: none; }
-        .question.active { display: block; }
-    </style>
+    <link rel="stylesheet" href="jautstili.css">
 </head>
 <body>
-    <div id="quiz-container">
-        <!-- Questions will be inserted here -->
+    <div id="header">
+        <h1>Web Development Quiz</h1>
     </div>
-    <button id="next-btn" onclick="nextQuestion()">Next</button>
+    <div id="quiz-wrapper">
+        <div id="quiz-container">
+            <!-- Questions will be inserted here -->
+        </div>
+        <button id="next-btn" onclick="nextQuestion()">Next</button>
+    </div>
 
     <script src="quiz.js"></script>
 </body>
