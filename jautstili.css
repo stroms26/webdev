@@ -1,0 +1,42 @@
+body{
+    background-color: lightcyan;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+p {
+    font-size: xx-large;
+}
+
+button {
+    background-color: darkblue;
+    color: white;
+    font-size: large;
+    border-radius: 5px;
+    border: none;
+    padding: 1% 3%;
+    margin-top: 3%;
+}
+
+label {
+    padding: 1%;
+    font-size: larger;
+}
+
+.question { display: none; }
+
+.question.active {
+    display: block;
+}
+
+#quiz-wrapper {
+    margin: auto;
+    padding: 2%;
+    width: 50%;
+    border-radius: 5px;
+    border-collapse: collapse;
+    border: 1px solid blue;
+}
+
+#next-btn {
+    display: block;
+}
