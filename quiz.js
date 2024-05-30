@@ -319,7 +319,7 @@ function displayFeedback(message, color) {
 
 function displayScore() {
   const container = document.getElementById("quiz-container");
-  container.innerHTML = `<p>You scored ${score} out of ${questions.length}.</p>`;
+  container.innerHTML = `<p>Tu ieguvi ${score} mo ${questions.length} punktiem.</p>`;
   document.getElementById("next-btn").style.display = "none";
 }
 
