@@ -27,6 +27,39 @@ const questions = [
     question: "The HTML element used to insert a line break is <______>.",
     correctAnswer: "br",
   },
+  { //viegls
+    type: "yesno",
+    question: "Selektors # identificē HTML elementu pēc klases",
+    options: ["Patiesi", "Aplami"],
+    correctAnswer: "Aplami",
+  },
+  {//viegls
+    type: "multiplechoice",
+    question: "HTML dokumentam var pievienot ārēju CSS ar kuru no šiem tagiem?",
+    options: [
+          "<link rel='stylesheet' href='mystyle.css'>\n",
+          "<a rel='stylesheet' href='mystyle.css'>\n",
+          "<iframe rel='stylesheet' href='mystyle.css'\n>"
+        ],
+    correctAnswer: "<link rel='stylesheet' href='mystyle.css'>\n",
+  },
+  {//gruts
+    type: "input",
+    question: "Uzrakstiet, kā ar Javascript palīdzību izgūt elementa ar id “myId” vērtību",
+    correctAnswer: "document.getElementById(“myId”).value",
+  },
+  {//viegls
+    type: "truefalse",
+    question: "Lai mainītu teksta fontu tiek izmantota font-family CSS īpasība",
+    options: ["Patiesi", "Aplami"],
+    correctAnswer: "Patiesi",
+  },
+  {//viegls
+    type: "multiplechoice",
+    question : "Ar kādu CSS rekvizītu veido atstarpi starp apmali un saturu?",
+    options: ["margin","border-spacing","space","padding"],
+    correctAnswer: "padding",
+  },
 ];
 
 let currentQuestionIndex = 0;
