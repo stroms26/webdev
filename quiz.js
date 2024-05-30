@@ -116,9 +116,12 @@ const questions = [
   },
   
 ];
-
 let currentQuestionIndex = 0;
 let score = 0;
+let timer; // Timer variable
+const timeLimit = 10 * 60; // 10 minutes in seconds
+let timeRemaining = timeLimit;
+
 function renderQuestion() {
   const container = document.getElementById("quiz-container");
   container.innerHTML = "";
@@ -203,6 +206,7 @@ function renderQuestion() {
 
   container.appendChild(questionElement);
 }
+
 function nextQuestion() {
   const container = document.getElementById("quiz-container");
   const activeQuestion = container.querySelector(".question.active");
@@ -226,7 +230,7 @@ function nextQuestion() {
 
   if (selectedRadioButton) {
     answers.push(selectedRadioButton.value);
-  } else if (selectedInputText) {
+  } else if (selectedInputText && selectedInputText.value.trim() !== "") {
     answers.push(selectedInputText.value.trim());
   } else if (selectedCheckboxes.length > 0) {
     selectedCheckboxes.forEach((checkbox) => {
@@ -304,11 +308,50 @@ function displayFeedback(message, color) {
 
 function displayScore() {
   const container = document.getElementById("quiz-container");
-  container.innerHTML = `<p>Tu ieguvi ${score} mo ${questions.length} punktiem.</p>`;
+  container.innerHTML = `<p>Tu ieguvi ${score} no ${questions.length} punktiem.</p>`;
+  const tryAgainButton = document.createElement("button");
+  tryAgainButton.textContent = "Mēģināt vēlreiz";
+  tryAgainButton.onclick = resetQuiz;
+  container.appendChild(tryAgainButton);
   document.getElementById("next-btn").style.display = "none";
+  clearInterval(timer); // Stop the timer
 }
 
-document.addEventListener("DOMContentLoaded", renderQuestion);
+function resetQuiz() {
+  currentQuestionIndex = 0;
+  score = 0;
+  timeRemaining = timeLimit;
+  document.getElementById("next-btn").style.display = "block";
+  const progressBoxes = document.querySelectorAll(".progress_box");
+  progressBoxes.forEach((box) => {
+    box.style.border = "2px solid dimgray";
+    box.style.background = "white";
+    box.style.color = "black";
+  });
+  renderQuestion();
+  startTimer(); // Restart the timer
+}
+
+function startTimer() {
+  const timerDisplay = document.getElementById("timer");
+  timer = setInterval(() => {
+    const minutes = Math.floor(timeRemaining / 60);
+    const seconds = timeRemaining % 60;
+    timerDisplay.textContent = `${minutes}:${
+      seconds < 10 ? "0" : ""
+    }${seconds}`;
+    timeRemaining--;
+    if (timeRemaining < 0) {
+      clearInterval(timer);
+      displayScore(); // End the quiz when time runs out
+    }
+  }, 1000);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderQuestion();
+  startTimer(); // Start the timer when the page loads
+});
 
 function fadeIn(element) {
   var opacity = 0;
