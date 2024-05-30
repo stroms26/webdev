@@ -33,6 +33,18 @@ const questions = [
     options: ["Patiesi", "Aplami"],
     correctAnswer: "Aplami",
   },
+  {//videjs
+    type: "truefalse",
+    question: "Tagam <input> nav nepieciešams aizvērošs tags",
+    options: ["Patiesi", "Aplami"],
+    correctAnswer: "Patiesi",
+  },
+  {//gruts
+    type: "multiplechoice",
+    question : "Javascript objekti funkcijām tiek padoti kā objektu kopijas vai atsauces?",
+    options: ["atsauces","kopijas"],
+    correctAnswer: "atsauces",
+  },
   {//viegls
     type: "multiplechoice",
     question: "HTML dokumentam var pievienot ārēju CSS ar kuru no šiem tagiem?",
@@ -60,6 +72,29 @@ const questions = [
     options: ["margin","border-spacing","space","padding"],
     correctAnswer: "padding",
   },
+  {//videjs
+    type: "multiplechoice",
+    question : "Kurš no šiem tagiem ir deprecated?",
+    options: ["<p>","<img>","<style>","<frame>"],
+    correctAnswer: "<frame>",
+  },
+  {//gruts
+    type: "input",
+    question: "Kādu CSS rekvizītu izmanto, lai noteiktu to elementu secību, kas pārklājās viens ar otru?",
+    correctAnswer: "z-index",
+  },
+  {//videjs
+    type: "multiplechoice",
+    question : "Vai Javascript ir interpretēta vai kompilēta valoda?",
+    options: ["kompilēta","interpretēta"],
+    correctAnswer: "interpretēta",
+  },
+  {//viegls
+    type: "multiplechoice",
+    question : "Kuru tagu izmanto sakārtota saraksta viedošanai?",
+    options: ["<ul>","<li>","<ol>","<dl>", "<td>"],
+    correctAnswer: "<ol>",
+  }, 
 ];
 
 let currentQuestionIndex = 0;
