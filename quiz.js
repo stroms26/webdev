@@ -120,6 +120,9 @@ const questions = [
 ];
 let currentQuestionIndex = 0;
 let score = 0;
+let timer; // Timer variable
+const timeLimit = 10 * 60; // 10 minutes in seconds
+let timeRemaining = timeLimit;
 
 function renderQuestion() {
   const container = document.getElementById("quiz-container");
@@ -313,11 +316,13 @@ function displayScore() {
   tryAgainButton.onclick = resetQuiz;
   container.appendChild(tryAgainButton);
   document.getElementById("next-btn").style.display = "none";
+  clearInterval(timer); // Stop the timer
 }
 
 function resetQuiz() {
   currentQuestionIndex = 0;
   score = 0;
+  timeRemaining = timeLimit;
   document.getElementById("next-btn").style.display = "block";
   const progressBoxes = document.querySelectorAll(".progress_box");
   progressBoxes.forEach((box) => {
@@ -326,9 +331,29 @@ function resetQuiz() {
     box.style.color = "black";
   });
   renderQuestion();
+  startTimer(); // Restart the timer
 }
 
-document.addEventListener("DOMContentLoaded", renderQuestion);
+function startTimer() {
+  const timerDisplay = document.getElementById("timer");
+  timer = setInterval(() => {
+    const minutes = Math.floor(timeRemaining / 60);
+    const seconds = timeRemaining % 60;
+    timerDisplay.textContent = `${minutes}:${
+      seconds < 10 ? "0" : ""
+    }${seconds}`;
+    timeRemaining--;
+    if (timeRemaining < 0) {
+      clearInterval(timer);
+      displayScore(); // End the quiz when time runs out
+    }
+  }, 1000);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderQuestion();
+  startTimer(); // Start the timer when the page loads
+});
 
 function fadeIn(element) {
   var opacity = 0;
