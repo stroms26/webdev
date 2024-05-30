@@ -13,7 +13,7 @@ const questions = [
   },
   {
     type: "input",
-    question: "What does CSS stand for?",
+    question: "Ko nozīmē CSS?",
     correctAnswer: "Cascading Style Sheets",
   },
   {
