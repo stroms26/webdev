@@ -130,7 +130,7 @@ const questions = [
     image: "jaut10.png",
     type: "multiplechoice",
     options: ["atb1", "atb2", "atb2", "atb2"],
-    correctAnswer: "Paris",
+    correctAnswer: "atb1",
   },
 ];
 
