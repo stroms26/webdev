@@ -126,6 +126,17 @@ function renderQuestion() {
   questionText.textContent = questionData.question;
   questionElement.appendChild(questionText);
 
+  //Change current question box color
+  if(currentQuestionIndex < 16){
+    const currentBox = document.getElementById(currentQuestionIndex+1);
+    currentBox.style.border = "2px solid darkslategray";
+    currentBox.style.background = "darkslategray";
+    currentBox.style.color = "white";
+  }
+  if(currentQuestionIndex == 15){
+    document.getElementById("next-btn").innerHTML = "Tālāk";
+  }
+
   // Add image if exists
   if (questionData.image) {
     const questionImage = document.createElement("img");
@@ -180,6 +191,11 @@ function nextQuestion() {
   const activeQuestion = container.querySelector(".question.active");
   if (!activeQuestion) return;
 
+  if(currentQuestionIndex < 16){
+    const currentBox = document.getElementById(currentQuestionIndex+1);
+    currentBox.style.border = "2px solid dimgray";
+  }
+
   const selectedRadioButton = activeQuestion.querySelector(
     'input[type="radio"][name="answer"]:checked'
   );
@@ -205,6 +221,9 @@ function nextQuestion() {
     ) {
       score++;
 
+      const currentBox = document.getElementById(currentQuestionIndex+1);
+      currentBox.style.background = "seagreen";
+
       var atbild = document.getElementById("atbilde");
       atbild.innerHTML = "Pareizi";
       atbild.style.color = "green";
@@ -217,6 +236,9 @@ function nextQuestion() {
       }, 1500);
     } else {
       // JA NEPAREIZI
+      const currentBox = document.getElementById(currentQuestionIndex+1);
+      currentBox.style.background = "indianred";
+
       var atbild = document.getElementById("atbilde");
       atbild.innerHTML = "Nepareizi";
       atbild.style.color = "red";
