@@ -1,4 +1,4 @@
-const questions = [ 
+const questions = [
   {
     //viegls
     type: "yesno",
@@ -6,7 +6,7 @@ const questions = [
     options: ["Patiesi", "Aplami"],
     correctAnswer: "Aplami",
   },
-  
+
   {
     type: "multipleanswers",
     question: "Kā tiek apzīmēti komentāri Javascript valodā?",
@@ -30,7 +30,7 @@ const questions = [
     ],
     correctAnswer: "<link rel='stylesheet' href='mystyle.css'>\n",
   },
-  
+
   {
     //gruts
     type: "input",
@@ -47,7 +47,8 @@ const questions = [
   },
   {
     type: "multipleanswers",
-    question: "Kuri no minētiem ir CSS īpašības elementa pozīcijas noteikšanai?",
+    question:
+      "Kuri no minētiem ir CSS īpašības elementa pozīcijas noteikšanai?",
     options: ["Fixed", "Nonstatic", "Static", "Absolute", "Flex"],
     correctAnswer: ["Fixed", "Static", "Absolute"],
   },
@@ -97,7 +98,14 @@ const questions = [
   {
     type: "multipleanswers",
     question: "Kādi no minētiem datu tipiem ir Javascript valodā?",
-    options: ["String", "Double", "Number", "Boolean", "Character", "Undefined"],
+    options: [
+      "String",
+      "Double",
+      "Number",
+      "Boolean",
+      "Character",
+      "Undefined",
+    ],
     correctAnswer: ["String", "Number", "Boolean", "Undefined"],
   },
   {
@@ -114,8 +122,8 @@ const questions = [
     options: ["<ul>", "<li>", "<ol>", "<dl>", "<td>"],
     correctAnswer: "<ol>",
   },
-  
 ];
+
 let currentQuestionIndex = 0;
 let score = 0;
 let timer; // Timer variable
@@ -252,46 +260,25 @@ function nextQuestion() {
 
   if (answers.length > 0) {
     const correctAnswers = questions[currentQuestionIndex].correctAnswer;
-    if (
-      Array.isArray(correctAnswers) &&
-      answers.every((answer) => correctAnswers.includes(answer)) &&
-      answers.length === correctAnswers.length
-    ) {
-      score++;
-      displayFeedback("Pareizi", "green");
-    } else if (
-      typeof correctAnswers === "string" &&
-      correctAnswers.toLowerCase() === answers[0].toLowerCase()
-    ) {
-      score++;
-
-      const currentBox = document.getElementById(currentQuestionIndex + 1);
-      currentBox.style.background = "seagreen";
-
-      var atbild = document.getElementById("atbilde");
-      atbild.innerHTML = "Pareizi";
-      atbild.style.color = "green";
-      atbild.style.opacity = 0;
-
-      fadeIn(atbild);
-
-      setTimeout(function () {
-        fadeOut(atbild);
-      }, 1500);
+    let isCorrect = false;
+    if (Array.isArray(correctAnswers)) {
+      isCorrect =
+        answers.every((answer) => correctAnswers.includes(answer)) &&
+        answers.length === correctAnswers.length;
     } else {
-      // JA NEPAREIZI
-      const currentBox = document.getElementById(currentQuestionIndex + 1);
-      currentBox.style.background = "red"; // Make index cell red
+      isCorrect =
+        typeof correctAnswers === "string" &&
+        correctAnswers.toLowerCase() === answers[0].toLowerCase();
+    }
 
-      var atbild = document.getElementById("atbilde");
-      atbild.innerHTML = "Nepareizi";
-      atbild.style.color = "red";
-      atbild.style.opacity = 0;
-      fadeIn(atbild);
-
-      setTimeout(function () {
-        fadeOut(atbild);
-      }, 1500);
+    const currentBox = document.getElementById(currentQuestionIndex + 1);
+    if (isCorrect) {
+      score++;
+      currentBox.style.background = "seagreen";
+      displayFeedback("Pareizi", "green");
+    } else {
+      currentBox.style.background = "red";
+      displayFeedback("Nepareizi", "red");
     }
   } else {
     displayFeedback("Jūs neatbildējāt uz jautājumu!", "grey");
