@@ -11,22 +11,7 @@ const questions = [
     options: ["<a>", "<link>", "<href>", "<url>"],
     correctAnswer: "<a>",
   },
-  {
-    type: "input",
-    question: "Ko nozīmē CSS?",
-    correctAnswer: "Cascading Style Sheets",
-  },
-  {
-    type: "truefalse",
-    question: "JavaScript is a client-side scripting language.",
-    options: ["True", "False"],
-    correctAnswer: "True",
-  },
-  {
-    type: "fillintheblank",
-    question: "The HTML element used to insert a line break is <______>.",
-    correctAnswer: "br",
-  },
+
   {
     //viegls
     type: "yesno",
@@ -130,12 +115,12 @@ const questions = [
     image: "jaut10.png",
     type: "multiplechoice",
     options: ["atb1", "atb2", "atb2", "atb2"],
-    correctAnswer: "Paris",
+    correctAnswer: "atb1",
   },
 ];
-
 let currentQuestionIndex = 0;
 let score = 0;
+
 function renderQuestion() {
   const container = document.getElementById("quiz-container");
   container.innerHTML = "";
@@ -282,6 +267,9 @@ function nextQuestion() {
       }, 1500);
     } else {
       // JA NEPAREIZI
+      const currentBox = document.getElementById(currentQuestionIndex + 1);
+      currentBox.style.background = "red"; // Make index cell red
+
       var atbild = document.getElementById("atbilde");
       atbild.innerHTML = "Nepareizi";
       atbild.style.color = "red";
@@ -319,8 +307,25 @@ function displayFeedback(message, color) {
 
 function displayScore() {
   const container = document.getElementById("quiz-container");
-  container.innerHTML = `<p>You scored ${score} out of ${questions.length}.</p>`;
+  container.innerHTML = `<p>Tu ieguvi ${score} no ${questions.length} punktiem.</p>`;
+  const tryAgainButton = document.createElement("button");
+  tryAgainButton.textContent = "Mēģināt vēlreiz";
+  tryAgainButton.onclick = resetQuiz;
+  container.appendChild(tryAgainButton);
   document.getElementById("next-btn").style.display = "none";
+}
+
+function resetQuiz() {
+  currentQuestionIndex = 0;
+  score = 0;
+  document.getElementById("next-btn").style.display = "block";
+  const progressBoxes = document.querySelectorAll(".progress_box");
+  progressBoxes.forEach((box) => {
+    box.style.border = "2px solid dimgray";
+    box.style.background = "white";
+    box.style.color = "black";
+  });
+  renderQuestion();
 }
 
 document.addEventListener("DOMContentLoaded", renderQuestion);
