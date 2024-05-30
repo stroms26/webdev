@@ -148,6 +148,26 @@ function renderQuestion() {
   questionText.textContent = questionData.question;
   questionElement.appendChild(questionText);
 
+  //Change current question box color
+  if (currentQuestionIndex < 16) {
+    const currentBox = document.getElementById(currentQuestionIndex + 1);
+    currentBox.style.border = "2px solid darkslategray";
+    currentBox.style.background = "darkslategray";
+    currentBox.style.color = "white";
+  }
+  if (currentQuestionIndex == 15) {
+    document.getElementById("next-btn").innerHTML = "Tālāk";
+  }
+
+  // Add image if exists
+  if (questionData.image) {
+    const questionImage = document.createElement("img");
+    questionImage.src = questionData.image;
+    questionImage.alt = "Question Image";
+    questionElement.appendChild(questionImage);
+  }
+
+  // Add answer options based on question type
   switch (questionData.type) {
     case "yesno":
     case "truefalse":
@@ -206,6 +226,11 @@ function nextQuestion() {
   const activeQuestion = container.querySelector(".question.active");
   if (!activeQuestion) return;
 
+  if (currentQuestionIndex < 16) {
+    const currentBox = document.getElementById(currentQuestionIndex + 1);
+    currentBox.style.border = "2px solid dimgray";
+  }
+
   let answers = [];
   const selectedRadioButton = activeQuestion.querySelector(
     'input[type="radio"][name="answer"]:checked'
@@ -241,9 +266,31 @@ function nextQuestion() {
       correctAnswers.toLowerCase() === answers[0].toLowerCase()
     ) {
       score++;
-      displayFeedback("Pareizi", "green");
+
+      const currentBox = document.getElementById(currentQuestionIndex + 1);
+      currentBox.style.background = "seagreen";
+
+      var atbild = document.getElementById("atbilde");
+      atbild.innerHTML = "Pareizi";
+      atbild.style.color = "green";
+      atbild.style.opacity = 0;
+
+      fadeIn(atbild);
+
+      setTimeout(function () {
+        fadeOut(atbild);
+      }, 1500);
     } else {
-      displayFeedback("Nepareizi", "red");
+      // JA NEPAREIZI
+      var atbild = document.getElementById("atbilde");
+      atbild.innerHTML = "Nepareizi";
+      atbild.style.color = "red";
+      atbild.style.opacity = 0;
+      fadeIn(atbild);
+
+      setTimeout(function () {
+        fadeOut(atbild);
+      }, 1500);
     }
   } else {
     displayFeedback("Jūs neatibldējāt uz jautājumu!", "grey");

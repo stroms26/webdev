@@ -24,18 +24,62 @@ label {
     font-size: larger;
 }
 
+input[type="radio"] {
+    display: block;
+}
+input[type="checkbox"] {
+    display: block;
+}
+
 .question { display: none; }
 
 .question.active {
     display: block;
 }
 
-#quiz-wrapper {
-    margin: auto;
+.progress_box {
+    border-collapse: collapse;
+    border: 2px solid dimgray;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 5px;
+    font-size: 20px;
+    margin: 1%;
+}
+
+#all_wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-content: start;
+}
+
+#quiz-wrapper, #progress_wrapper {
+    margin: 1%;
     padding: 2%;
+    padding-top: 0%;
     width: 50%;
     border-collapse: collapse;
     border: 1px solid dimgray;
+}
+
+#progress_wrapper {
+    width: 20%;
+    height: 100%;
+    padding-bottom: 2%;
+}
+
+#progress_tracker {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#progress {
+    font-size: larger;
 }
 
 #next-btn {
