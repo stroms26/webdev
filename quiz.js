@@ -129,6 +129,7 @@ const questions = [
 
 let currentQuestionIndex = 0;
 let score = 0;
+
 function renderQuestion() {
   const container = document.getElementById("quiz-container");
   container.innerHTML = "";
@@ -137,20 +138,10 @@ function renderQuestion() {
   const questionElement = document.createElement("div");
   questionElement.classList.add("question", "active");
 
-  // Add question text
   const questionText = document.createElement("p");
   questionText.textContent = questionData.question;
   questionElement.appendChild(questionText);
 
-  // Add image if exists
-  if (questionData.image) {
-    const questionImage = document.createElement("img");
-    questionImage.src = questionData.image;
-    questionImage.alt = "Question Image";
-    questionElement.appendChild(questionImage);
-  }
-
-  // Add answer options based on question type
   switch (questionData.type) {
     case "yesno":
     case "truefalse":
