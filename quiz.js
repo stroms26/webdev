@@ -1,7 +1,7 @@
 const questions = [
   {
     type: "yesno",
-    question: "Is HTML a programming language?",
+    question: "Vai HTML ir programmēšanas valoda?",
     options: ["Yes", "No"],
     correctAnswer: "No",
   },
@@ -122,4 +122,3 @@ function displayScore() {
 }
 
 document.addEventListener("DOMContentLoaded", renderQuestion);
-
