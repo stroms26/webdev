@@ -24,10 +24,7 @@ label {
     font-size: larger;
 }
 
-input[type="radio"] {
-    display: block;
-}
-input[type="checkbox"] {
+input[type="text"] {
     display: block;
 }
 
@@ -48,10 +45,13 @@ input[type="checkbox"] {
     margin: 1%;
 }
 
-#all_wrapper {
+.flex_input, #all_wrapper {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+
+#all_wrapper {
     justify-content: left;
     align-content: start;
 }

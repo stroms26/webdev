@@ -161,11 +161,15 @@ function renderQuestion() {
         const label = document.createElement("label");
         label.textContent = option;
         const input = document.createElement("input");
+        const questionContainer = document.createElement("questionContainer");
+        questionContainer.className = "flex_input";
         input.type = "radio";
         input.name = "answer";
         input.value = option;
-        label.appendChild(input);
-        questionElement.appendChild(label);
+        label.htmlFor = input;
+        questionContainer.appendChild(input);
+        questionContainer.appendChild(label);
+        questionElement.appendChild(questionContainer);
       });
       break;
 
@@ -174,11 +178,15 @@ function renderQuestion() {
         const label = document.createElement("label");
         label.textContent = option;
         const input = document.createElement("input");
+        const questionContainer = document.createElement("questionContainer");
+        questionContainer.className = "flex_input";
         input.type = "radio";
         input.name = "answer";
         input.value = option;
-        label.appendChild(input);
-        questionElement.appendChild(label);
+        label.htmlFor = input;
+        questionContainer.appendChild(input);
+        questionContainer.appendChild(label);
+        questionElement.appendChild(questionContainer);
       });
       break;
 
@@ -187,11 +195,15 @@ function renderQuestion() {
         const label = document.createElement("label");
         label.textContent = option;
         const input = document.createElement("input");
+        const questionContainer = document.createElement("questionContainer");
+        questionContainer.className = "flex_input";
         input.type = "checkbox";
         input.name = "answer";
         input.value = option;
-        label.appendChild(input);
-        questionElement.appendChild(label);
+        label.htmlFor = input;
+        questionContainer.appendChild(input);
+        questionContainer.appendChild(label);
+        questionElement.appendChild(questionContainer);
       });
       break;
 
@@ -282,7 +294,7 @@ function nextQuestion() {
       }, 1500);
     }
   } else {
-    displayFeedback("Jūs neatibldējāt uz jautājumu!", "grey");
+    displayFeedback("Jūs neatbildējāt uz jautājumu!", "grey");
     return;
   }
 
@@ -308,7 +320,7 @@ function displayFeedback(message, color) {
 
 function displayScore() {
   const container = document.getElementById("quiz-container");
-  container.innerHTML = `<p>Tu ieguvi ${score} no ${questions.length} punktiem.</p>`;
+  container.innerHTML = `<p>Jūs ieguvi ${score} no ${questions.length} punktiem.</p>`;
   const tryAgainButton = document.createElement("button");
   tryAgainButton.textContent = "Mēģināt vēlreiz";
   tryAgainButton.onclick = resetQuiz;
