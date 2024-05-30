@@ -1,5 +1,5 @@
 const questions = [
-  /*{
+  {
     type: "yesno",
     question: "Is HTML a programming language?",
     options: ["Yes", "No"],
@@ -26,7 +26,7 @@ const questions = [
     type: "fillintheblank",
     question: "The HTML element used to insert a line break is <______>.",
     correctAnswer: "br",
-  },*/
+  },
   { //viegls
     type: "yesno",
     question: "Selektors # identificē HTML elementu pēc klases",
