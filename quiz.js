@@ -1,7 +1,7 @@
 const questions = [
   {
     type: "yesno",
-    question: "Vai HTML ir programmēšanas valoda?",
+    question: "Is HTML a programming language?",
     options: ["Yes", "No"],
     correctAnswer: "No",
   },
