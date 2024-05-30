@@ -118,9 +118,9 @@ const questions = [
     correctAnswer: "atb1",
   },
 ];
-
 let currentQuestionIndex = 0;
 let score = 0;
+
 function renderQuestion() {
   const container = document.getElementById("quiz-container");
   container.innerHTML = "";
@@ -205,6 +205,7 @@ function renderQuestion() {
 
   container.appendChild(questionElement);
 }
+
 function nextQuestion() {
   const container = document.getElementById("quiz-container");
   const activeQuestion = container.querySelector(".question.active");
@@ -306,8 +307,25 @@ function displayFeedback(message, color) {
 
 function displayScore() {
   const container = document.getElementById("quiz-container");
-  container.innerHTML = `<p>Tu ieguvi ${score} mo ${questions.length} punktiem.</p>`;
+  container.innerHTML = `<p>Tu ieguvi ${score} no ${questions.length} punktiem.</p>`;
+  const tryAgainButton = document.createElement("button");
+  tryAgainButton.textContent = "Mēģināt vēlreiz";
+  tryAgainButton.onclick = resetQuiz;
+  container.appendChild(tryAgainButton);
   document.getElementById("next-btn").style.display = "none";
+}
+
+function resetQuiz() {
+  currentQuestionIndex = 0;
+  score = 0;
+  document.getElementById("next-btn").style.display = "block";
+  const progressBoxes = document.querySelectorAll(".progress_box");
+  progressBoxes.forEach((box) => {
+    box.style.border = "2px solid dimgray";
+    box.style.background = "white";
+    box.style.color = "black";
+  });
+  renderQuestion();
 }
 
 document.addEventListener("DOMContentLoaded", renderQuestion);
