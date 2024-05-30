@@ -35,6 +35,21 @@ const questions = [
     correctAnswer: "Aplami",
   },
   {
+    //videjs
+    type: "truefalse",
+    question: "Tagam <input> nav nepieciešams aizvērošs tags",
+    options: ["Patiesi", "Aplami"],
+    correctAnswer: "Patiesi",
+  },
+  {
+    //gruts
+    type: "multiplechoice",
+    question:
+      "Javascript objekti funkcijām tiek padoti kā objektu kopijas vai atsauces?",
+    options: ["atsauces", "kopijas"],
+    correctAnswer: "atsauces",
+  },
+  {
     //viegls
     type: "multiplechoice",
     question: "HTML dokumentam var pievienot ārēju CSS ar kuru no šiem tagiem?",
@@ -65,6 +80,34 @@ const questions = [
     question: "Ar kādu CSS rekvizītu veido atstarpi starp apmali un saturu?",
     options: ["margin", "border-spacing", "space", "padding"],
     correctAnswer: "padding",
+  },
+  {
+    //videjs
+    type: "multiplechoice",
+    question: "Kurš no šiem tagiem ir deprecated?",
+    options: ["<p>", "<img>", "<style>", "<frame>"],
+    correctAnswer: "<frame>",
+  },
+  {
+    //gruts
+    type: "input",
+    question:
+      "Kādu CSS rekvizītu izmanto, lai noteiktu to elementu secību, kas pārklājās viens ar otru?",
+    correctAnswer: "z-index",
+  },
+  {
+    //videjs
+    type: "multiplechoice",
+    question: "Vai Javascript ir interpretēta vai kompilēta valoda?",
+    options: ["kompilēta", "interpretēta"],
+    correctAnswer: "interpretēta",
+  },
+  {
+    //viegls
+    type: "multiplechoice",
+    question: "Kuru tagu izmanto sakārtota saraksta viedošanai?",
+    options: ["<ul>", "<li>", "<ol>", "<dl>", "<td>"],
+    correctAnswer: "<ol>",
   },
 ];
 
@@ -137,21 +180,64 @@ function nextQuestion() {
   const activeQuestion = container.querySelector(".question.active");
   if (!activeQuestion) return;
 
-  const answer =
-    activeQuestion.querySelector('input[name="answer"]:checked')?.value ||
-    activeQuestion.querySelector('input[name="answer"]')?.value;
-  if (answer) {
+  const selectedRadioButton = activeQuestion.querySelector(
+    'input[type="radio"][name="answer"]:checked'
+  );
+  const selectedInputText = activeQuestion.querySelector(
+    'input[type="text"][name="answer"]'
+  );
+
+  let answer;
+
+  // RADIO PROBLEMA
+  if (selectedRadioButton) {
+    answer = selectedRadioButton.value;
+  } else if (selectedInputText) {
+    //VAI UZRAKSTITS
+    answer = selectedInputText.value.trim();
+  }
+
+  if (answer !== undefined && answer !== "") {
+    // JA PAREIZI
     if (
       answer.toLowerCase() ===
       questions[currentQuestionIndex].correctAnswer.toLowerCase()
     ) {
       score++;
-      alert("Correct!");
+
+      var atbild = document.getElementById("atbilde");
+      atbild.innerHTML = "Pareizi";
+      atbild.style.color = "green";
+      atbild.style.opacity = 0;
+
+      fadeIn(atbild);
+
+      setTimeout(function () {
+        fadeOut(atbild);
+      }, 1500);
     } else {
-      alert("Incorrect!");
+      // JA NEPAREIZI
+      var atbild = document.getElementById("atbilde");
+      atbild.innerHTML = "Nepareizi";
+      atbild.style.color = "red";
+      atbild.style.opacity = 0;
+      fadeIn(atbild);
+
+      setTimeout(function () {
+        fadeOut(atbild);
+      }, 1500);
     }
   } else {
-    alert("Please select or enter an answer.");
+    // JA NEATBILDEJA
+    var atbild = document.getElementById("atbilde");
+    atbild.innerHTML = "Jūs neatibldējāt uz jautājumu!";
+    atbild.style.color = "grey";
+    atbild.style.opacity = 0;
+
+    fadeIn(atbild);
+    setTimeout(function () {
+      atbild.style.opacity = 1;
+    }, 1500);
     return;
   }
 
@@ -170,3 +256,28 @@ function displayScore() {
 }
 
 document.addEventListener("DOMContentLoaded", renderQuestion);
+
+function fadeIn(element) {
+  var opacity = 0;
+  var interval = setInterval(function () {
+    if (opacity >= 1) {
+      clearInterval(interval);
+    } else {
+      element.style.opacity = opacity;
+      opacity += 0.01;
+    }
+  }, 10);
+}
+
+function fadeOut(element) {
+  var opacity = 1;
+  var interval = setInterval(function () {
+    if (opacity <= 0) {
+      clearInterval(interval);
+      element.innerHTML = "";
+    } else {
+      element.style.opacity = opacity;
+      opacity -= 0.01;
+    }
+  }, 10);
+}
