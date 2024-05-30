@@ -111,6 +111,13 @@ const questions = [
   },
 
   {
+    type: "multipleanswers",
+    question: "Which of the following are JavaScript data types?",
+    options: ["String", "Number", "Boolean", "Character", "Undefined"],
+    correctAnswer: ["String", "Number", "Boolean", "Undefined"],
+  },
+
+  {
     question: "What is the capital of France?",
     image: "jaut9.png",
     type: "multiplechoice",
@@ -129,7 +136,6 @@ const questions = [
 
 let currentQuestionIndex = 0;
 let score = 0;
-
 function renderQuestion() {
   const container = document.getElementById("quiz-container");
   container.innerHTML = "";
@@ -170,6 +176,19 @@ function renderQuestion() {
       });
       break;
 
+    case "multipleanswers":
+      questionData.options.forEach((option) => {
+        const label = document.createElement("label");
+        label.textContent = option;
+        const input = document.createElement("input");
+        input.type = "checkbox";
+        input.name = "answer";
+        input.value = option;
+        label.appendChild(input);
+        questionElement.appendChild(label);
+      });
+      break;
+
     case "input":
     case "fillintheblank":
       const input = document.createElement("input");
@@ -187,64 +206,47 @@ function nextQuestion() {
   const activeQuestion = container.querySelector(".question.active");
   if (!activeQuestion) return;
 
+  let answers = [];
   const selectedRadioButton = activeQuestion.querySelector(
     'input[type="radio"][name="answer"]:checked'
+  );
+  const selectedCheckboxes = activeQuestion.querySelectorAll(
+    'input[type="checkbox"][name="answer"]:checked'
   );
   const selectedInputText = activeQuestion.querySelector(
     'input[type="text"][name="answer"]'
   );
 
-  let answer;
-
-  // RADIO PROBLEMA
   if (selectedRadioButton) {
-    answer = selectedRadioButton.value;
+    answers.push(selectedRadioButton.value);
   } else if (selectedInputText) {
-    //VAI UZRAKSTITS
-    answer = selectedInputText.value.trim();
+    answers.push(selectedInputText.value.trim());
+  } else if (selectedCheckboxes.length > 0) {
+    selectedCheckboxes.forEach((checkbox) => {
+      answers.push(checkbox.value);
+    });
   }
 
-  if (answer !== undefined && answer !== "") {
-    // JA PAREIZI
+  if (answers.length > 0) {
+    const correctAnswers = questions[currentQuestionIndex].correctAnswer;
     if (
-      answer.toLowerCase() ===
-      questions[currentQuestionIndex].correctAnswer.toLowerCase()
+      Array.isArray(correctAnswers) &&
+      answers.every((answer) => correctAnswers.includes(answer)) &&
+      answers.length === correctAnswers.length
     ) {
       score++;
-
-      var atbild = document.getElementById("atbilde");
-      atbild.innerHTML = "Pareizi";
-      atbild.style.color = "green";
-      atbild.style.opacity = 0;
-
-      fadeIn(atbild);
-
-      setTimeout(function () {
-        fadeOut(atbild);
-      }, 1500);
+      displayFeedback("Pareizi", "green");
+    } else if (
+      typeof correctAnswers === "string" &&
+      correctAnswers.toLowerCase() === answers[0].toLowerCase()
+    ) {
+      score++;
+      displayFeedback("Pareizi", "green");
     } else {
-      // JA NEPAREIZI
-      var atbild = document.getElementById("atbilde");
-      atbild.innerHTML = "Nepareizi";
-      atbild.style.color = "red";
-      atbild.style.opacity = 0;
-      fadeIn(atbild);
-
-      setTimeout(function () {
-        fadeOut(atbild);
-      }, 1500);
+      displayFeedback("Nepareizi", "red");
     }
   } else {
-    // JA NEATBILDEJA
-    var atbild = document.getElementById("atbilde");
-    atbild.innerHTML = "Jūs neatibldējāt uz jautājumu!";
-    atbild.style.color = "grey";
-    atbild.style.opacity = 0;
-
-    fadeIn(atbild);
-    setTimeout(function () {
-      atbild.style.opacity = 1;
-    }, 1500);
+    displayFeedback("Jūs neatibldējāt uz jautājumu!", "grey");
     return;
   }
 
@@ -254,6 +256,18 @@ function nextQuestion() {
   } else {
     displayScore();
   }
+}
+
+function displayFeedback(message, color) {
+  var atbild = document.getElementById("atbilde");
+  atbild.innerHTML = message;
+  atbild.style.color = color;
+  atbild.style.opacity = 0;
+  fadeIn(atbild);
+
+  setTimeout(function () {
+    fadeOut(atbild);
+  }, 1500);
 }
 
 function displayScore() {
