@@ -109,6 +109,22 @@ const questions = [
     options: ["<ul>", "<li>", "<ol>", "<dl>", "<td>"],
     correctAnswer: "<ol>",
   },
+
+  {
+    question: "What is the capital of France?",
+    image: "jaut9.png",
+    type: "multiplechoice",
+    options: ["Paris", "London", "Berlin", "Madrid"],
+    correctAnswer: "Paris",
+  },
+
+  {
+    question: "Jautajums?",
+    image: "jaut10.png",
+    type: "multiplechoice",
+    options: ["atb1", "atb2", "atb2", "atb2"],
+    correctAnswer: "Paris",
+  },
 ];
 
 let currentQuestionIndex = 0;
