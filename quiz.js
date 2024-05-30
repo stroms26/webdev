@@ -1,17 +1,4 @@
-const questions = [
-  {
-    type: "yesno",
-    question: "Is HTML a programming language?",
-    options: ["Yes", "No"],
-    correctAnswer: "No",
-  },
-  {
-    type: "multiplechoice",
-    question: "Which tag is used to create a hyperlink in HTML?",
-    options: ["<a>", "<link>", "<href>", "<url>"],
-    correctAnswer: "<a>",
-  },
-
+const questions = [ 
   {
     //viegls
     type: "yesno",
@@ -19,20 +6,18 @@ const questions = [
     options: ["Patiesi", "Aplami"],
     correctAnswer: "Aplami",
   },
+  
   {
-    //videjs
-    type: "truefalse",
-    question: "Tagam <input> nav nepieciešams aizvērošs tags",
-    options: ["Patiesi", "Aplami"],
-    correctAnswer: "Patiesi",
+    type: "multipleanswers",
+    question: "Kā tiek apzīmēti komentāri Javascript valodā?",
+    options: ["#", "//", "--", "/* */", "**"],
+    correctAnswer: ["//", "/* */"],
   },
   {
-    //gruts
-    type: "multiplechoice",
-    question:
-      "Javascript objekti funkcijām tiek padoti kā objektu kopijas vai atsauces?",
-    options: ["atsauces", "kopijas"],
-    correctAnswer: "atsauces",
+    question: "Kuru skaitli izvadīs sekojošs koda fragments?",
+    image: "jaut10.png",
+    type: "input",
+    correctAnswer: "126",
   },
   {
     //viegls
@@ -45,6 +30,7 @@ const questions = [
     ],
     correctAnswer: "<link rel='stylesheet' href='mystyle.css'>\n",
   },
+  
   {
     //gruts
     type: "input",
@@ -60,11 +46,39 @@ const questions = [
     correctAnswer: "Patiesi",
   },
   {
+    type: "multipleanswers",
+    question: "Kuri no minētiem ir CSS īpašības elementa pozīcijas noteikšanai?",
+    options: ["Fixed", "Nonstatic", "Static", "Absolute", "Flex"],
+    correctAnswer: ["Fixed", "Static", "Absolute"],
+  },
+  {
+    //gruts
+    type: "multiplechoice",
+    question:
+      "Javascript objekti funkcijām tiek padoti kā objektu kopijas vai atsauces?",
+    options: ["atsauces", "kopijas"],
+    correctAnswer: "atsauces",
+  },
+  {
     //viegls
     type: "multiplechoice",
     question: "Ar kādu CSS rekvizītu veido atstarpi starp apmali un saturu?",
     options: ["margin", "border-spacing", "space", "padding"],
     correctAnswer: "padding",
+  },
+  {
+    question: "Kādā krāsā būs teksts “Mans virsraksts”?",
+    image: "jaut9.png",
+    type: "multiplechoice",
+    options: ["Zils", "Zaļš", "Melns"],
+    correctAnswer: "Zaļš",
+  },
+  {
+    //videjs
+    type: "truefalse",
+    question: "Tagam <input> nav nepieciešams aizvērošs tags",
+    options: ["Patiesi", "Aplami"],
+    correctAnswer: "Patiesi",
   },
   {
     //videjs
@@ -81,6 +95,12 @@ const questions = [
     correctAnswer: "z-index",
   },
   {
+    type: "multipleanswers",
+    question: "Kādi no minētiem datu tipiem ir Javascript valodā?",
+    options: ["String", "Double", "Number", "Boolean", "Character", "Undefined"],
+    correctAnswer: ["String", "Number", "Boolean", "Undefined"],
+  },
+  {
     //videjs
     type: "multiplechoice",
     question: "Vai Javascript ir interpretēta vai kompilēta valoda?",
@@ -94,29 +114,7 @@ const questions = [
     options: ["<ul>", "<li>", "<ol>", "<dl>", "<td>"],
     correctAnswer: "<ol>",
   },
-
-  {
-    type: "multipleanswers",
-    question: "Which of the following are JavaScript data types?",
-    options: ["String", "Number", "Boolean", "Character", "Undefined"],
-    correctAnswer: ["String", "Number", "Boolean", "Undefined"],
-  },
-
-  {
-    question: "What is the capital of France?",
-    image: "jaut9.png",
-    type: "multiplechoice",
-    options: ["Paris", "London", "Berlin", "Madrid"],
-    correctAnswer: "Paris",
-  },
-
-  {
-    question: "Jautajums?",
-    image: "jaut10.png",
-    type: "multiplechoice",
-    options: ["atb1", "atb2", "atb2", "atb2"],
-    correctAnswer: "atb1",
-  },
+  
 ];
 
 let currentQuestionIndex = 0;
