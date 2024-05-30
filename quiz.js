@@ -11,22 +11,7 @@ const questions = [
     options: ["<a>", "<link>", "<href>", "<url>"],
     correctAnswer: "<a>",
   },
-  {
-    type: "input",
-    question: "Ko nozīmē CSS?",
-    correctAnswer: "Cascading Style Sheets",
-  },
-  {
-    type: "truefalse",
-    question: "JavaScript is a client-side scripting language.",
-    options: ["True", "False"],
-    correctAnswer: "True",
-  },
-  {
-    type: "fillintheblank",
-    question: "The HTML element used to insert a line break is <______>.",
-    correctAnswer: "br",
-  },
+
   {
     //viegls
     type: "yesno",
@@ -220,7 +205,6 @@ function renderQuestion() {
 
   container.appendChild(questionElement);
 }
-
 function nextQuestion() {
   const container = document.getElementById("quiz-container");
   const activeQuestion = container.querySelector(".question.active");
@@ -282,6 +266,9 @@ function nextQuestion() {
       }, 1500);
     } else {
       // JA NEPAREIZI
+      const currentBox = document.getElementById(currentQuestionIndex + 1);
+      currentBox.style.background = "red"; // Make index cell red
+
       var atbild = document.getElementById("atbilde");
       atbild.innerHTML = "Nepareizi";
       atbild.style.color = "red";
