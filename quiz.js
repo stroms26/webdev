@@ -89,23 +89,61 @@ function nextQuestion() {
   const activeQuestion = container.querySelector(".question.active");
   if (!activeQuestion) return;
 
-  const answer =
-    activeQuestion.querySelector('input[name="answer"]:checked')?.value ||
-    activeQuestion.querySelector('input[name="answer"]')?.value;
-  if (answer) {
+  const selectedRadioButton = activeQuestion.querySelector('input[type="radio"][name="answer"]:checked');
+  const selectedInputText = activeQuestion.querySelector('input[type="text"][name="answer"]');
+
+  let answer;
+
+// RADIO PROBLEMA
+if (selectedRadioButton) {
+    answer = selectedRadioButton.value;
+} else if (selectedInputText) { //VAI UZRAKSTITS
+    answer = selectedInputText.value.trim();
+}
+
+if (answer !== undefined && answer !== "") {
+    // JA PAREIZI
     if (
-      answer.toLowerCase() ===
-      questions[currentQuestionIndex].correctAnswer.toLowerCase()
-    ) {
-      score++;
-      alert("Correct!");
+      answer.toLowerCase() === 
+      questions[currentQuestionIndex].correctAnswer.toLowerCase()) {
+        score++;
+       
+        var atbild = document.getElementById("atbilde");
+        atbild.innerHTML = "Pareizi";
+        atbild.style.color = "green";
+        atbild.style.opacity = 0;
+
+        fadeIn(atbild)
+        
+        setTimeout(function () {
+            fadeOut(atbild)
+        }, 1500); 
     } else {
-      alert("Incorrect!");
+        // JA NEPAREIZI
+        var atbild = document.getElementById("atbilde");
+        atbild.innerHTML = "Nepareizi";
+        atbild.style.color = "red";
+        atbild.style.opacity = 0;
+        fadeIn(atbild)
+        
+        setTimeout(function () {
+            fadeOut(atbild)
+        }, 1500);
     }
-  } else {
-    alert("Please select or enter an answer.");
-    return;
-  }
+} else {
+    // JA NEATBILDEJA
+        var atbild = document.getElementById("atbilde");
+        atbild.innerHTML = "Jūs neatibldējāt uz jautājumu!";
+        atbild.style.color = "grey";
+        atbild.style.opacity = 0;
+
+        fadeIn(atbild)
+        setTimeout(function () {
+            atbild.style.opacity = 1;
+        }, 1500); 
+    return; 
+}
+
 
   currentQuestionIndex++;
   if (currentQuestionIndex < questions.length) {
@@ -122,3 +160,29 @@ function displayScore() {
 }
 
 document.addEventListener("DOMContentLoaded", renderQuestion);
+
+
+function fadeIn(element) {
+  var opacity = 0;
+  var interval = setInterval(function () {
+    if (opacity >= 1) {
+      clearInterval(interval);
+    } else {
+      element.style.opacity = opacity;
+      opacity += 0.01; 
+    }
+    }, 10); 
+}
+
+function fadeOut(element) {
+  var opacity = 1;
+  var interval = setInterval(function () {
+   if (opacity <= 0) {
+    clearInterval(interval);
+    element.innerHTML = ""; 
+  } else {
+    element.style.opacity = opacity;
+    opacity -= 0.01; 
+  }
+   }, 10); 
+}
