@@ -27,44 +27,49 @@ const questions = [
     question: "The HTML element used to insert a line break is <______>.",
     correctAnswer: "br",
   },
-  { //viegls
+  {
+    //viegls
     type: "yesno",
     question: "Selektors # identificē HTML elementu pēc klases",
     options: ["Patiesi", "Aplami"],
     correctAnswer: "Aplami",
   },
-  {//viegls
+  {
+    //viegls
     type: "multiplechoice",
     question: "HTML dokumentam var pievienot ārēju CSS ar kuru no šiem tagiem?",
     options: [
-          "<link rel='stylesheet' href='mystyle.css'>\n",
-          "<a rel='stylesheet' href='mystyle.css'>\n",
-          "<iframe rel='stylesheet' href='mystyle.css'\n>"
-        ],
+      "<link rel='stylesheet' href='mystyle.css'>\n",
+      "<a rel='stylesheet' href='mystyle.css'>\n",
+      "<iframe rel='stylesheet' href='mystyle.css'\n>",
+    ],
     correctAnswer: "<link rel='stylesheet' href='mystyle.css'>\n",
   },
-  {//gruts
+  {
+    //gruts
     type: "input",
-    question: "Uzrakstiet, kā ar Javascript palīdzību izgūt elementa ar id “myId” vērtību",
+    question:
+      "Uzrakstiet, kā ar Javascript palīdzību izgūt elementa ar id “myId” vērtību",
     correctAnswer: "document.getElementById(“myId”).value",
   },
-  {//viegls
+  {
+    //viegls
     type: "truefalse",
     question: "Lai mainītu teksta fontu tiek izmantota font-family CSS īpasība",
     options: ["Patiesi", "Aplami"],
     correctAnswer: "Patiesi",
   },
-  {//viegls
+  {
+    //viegls
     type: "multiplechoice",
-    question : "Ar kādu CSS rekvizītu veido atstarpi starp apmali un saturu?",
-    options: ["margin","border-spacing","space","padding"],
+    question: "Ar kādu CSS rekvizītu veido atstarpi starp apmali un saturu?",
+    options: ["margin", "border-spacing", "space", "padding"],
     correctAnswer: "padding",
   },
 ];
 
 let currentQuestionIndex = 0;
 let score = 0;
-
 function renderQuestion() {
   const container = document.getElementById("quiz-container");
   container.innerHTML = "";
@@ -73,10 +78,20 @@ function renderQuestion() {
   const questionElement = document.createElement("div");
   questionElement.classList.add("question", "active");
 
+  // Add question text
   const questionText = document.createElement("p");
   questionText.textContent = questionData.question;
   questionElement.appendChild(questionText);
 
+  // Add image if exists
+  if (questionData.image) {
+    const questionImage = document.createElement("img");
+    questionImage.src = questionData.image;
+    questionImage.alt = "Question Image";
+    questionElement.appendChild(questionImage);
+  }
+
+  // Add answer options based on question type
   switch (questionData.type) {
     case "yesno":
     case "truefalse":
