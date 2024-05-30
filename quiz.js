@@ -307,7 +307,7 @@ function displayFeedback(message, color) {
 
 function displayScore() {
   const container = document.getElementById("quiz-container");
-  container.innerHTML = `<p>Jūs ieguvi ${score} no ${questions.length} punktiem.</p>`;
+  container.innerHTML = `<p>Jūs ieguvāt ${score} no ${questions.length} punktiem.</p>`;
   const tryAgainButton = document.createElement("button");
   tryAgainButton.textContent = "Mēģināt vēlreiz";
   tryAgainButton.onclick = resetQuiz;
