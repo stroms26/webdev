@@ -244,7 +244,7 @@ function nextQuestion() {
 
   if (selectedRadioButton) {
     answers.push(selectedRadioButton.value);
-  } else if (selectedInputText) {
+  } else if (selectedInputText && selectedInputText.value.trim() !== "") {
     answers.push(selectedInputText.value.trim());
   } else if (selectedCheckboxes.length > 0) {
     selectedCheckboxes.forEach((checkbox) => {
